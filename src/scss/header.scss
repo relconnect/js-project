@@ -1,0 +1,117 @@
+.header {
+  max-width: 120rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 3.3rem;
+  margin-bottom: 3rem;
+
+  &__link {
+    font-size: 1.6rem;
+    font-family: $link-font;
+    color: $link-color;
+    line-height: 1.688;
+    text-decoration: none;
+    position: relative;
+
+    &::before {
+      content: url(../img/icon.png);
+      position: absolute;
+      left: -2rem;
+    }
+  }
+
+  &__favorit {
+    text-align: right;
+    margin-bottom: 10.6rem;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.form {
+  //   width: 550px;
+  display: flex;
+  flex-basis: 55rem;
+
+  &__input {
+    width: 80%;
+    border: 2px solid #c0c2c4;
+    border-radius: 1.5rem;
+    font-size: 1rem;
+    font-family: $link-font;
+    color: $input-text-color;
+    padding: 0.7rem 1.5rem;
+
+    &:focus {
+      border: 2px solid $focusing-color;
+      outline: none;
+    }
+  }
+
+  &__button {
+    background-color: $btn-color;
+    color: $primery;
+    border-radius: 1.5rem;
+    font-size: 1.4rem;
+    font-family: $button-font;
+    font-weight: bold;
+    border: none;
+
+    &-small {
+      min-width: 8.1rem;
+      margin-left: 1rem;
+      box-sizing: border-box;
+    }
+
+    &-large {
+      min-width: 8.1rem;      
+      box-sizing: border-box;
+      padding: 0.6rem 2rem;
+      margin: 0 auto;
+      margin-top: 1.8rem;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      background-color: $btn-color-active;
+    }
+  }
+
+  ::-webkit-input-placeholder {
+    color: $placeholder-color;
+    font-family: $link-font;
+    font-size: 1rem;
+  }
+
+  ::-moz-placeholder {
+    color: $placeholder-color;
+    font-family: $link-font;
+    font-size: 1rem;
+  } /* Firefox 19+ */
+  :-moz-placeholder {
+    color: $placeholder-color;
+    font-family: $link-font;
+    font-size: 1rem;
+  } /* Firefox 18- */
+  :-ms-input-placeholder {
+    color: $placeholder-color;
+    font-family: $link-font;
+    font-size: 1rem;
+  }
+}

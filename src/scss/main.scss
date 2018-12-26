@@ -1,0 +1,96 @@
+.main {
+  max-width: 88rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 5rem;
+}
+
+.card {
+  width: 210px;
+  height: 122px;
+  display: flex;
+  justify-content: center;
+  background-color: $primery-color-img;
+  margin-right: 13px;
+  margin-bottom: 13px;
+
+  &:nth-child(4n) {
+    margin-right: 0px;
+  }
+}
+
+.modal {
+  margin: 0; /* убираем отступы */
+  padding: 0; /* убираем отступы */
+  position: fixed; /* фиксируем положение */
+  top: 0; /* растягиваем блок по всему экрану */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.5); /* полупрозрачный цвет фона */
+  z-index: 2; /* выводим фон поверх всех слоев на странице браузера */
+  opacity: 1; /* Делаем невидимым */
+  pointer-events: none; /* элемент невидим для событий мыши */
+
+  &__img {
+    width: 70rem;
+    height: 41rem;
+    margin: 0 auto;
+    display: block;
+    z-index: 1000;
+    margin-top: 10%;
+  }
+
+  &__buttons {
+    width: 114px;
+    height: 35px;
+    background-color: #673ab7;
+    margin: 0 auto;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    padding-left: 13px;
+    box-sizing: border-box;
+    margin-top: 15px;
+  }
+
+  .button-left {
+    position: relative;
+
+    &:before {
+      content: url(../img/left-icon.png);
+      top: 0;
+    }
+  }
+
+  .button-right {
+    position: relative;
+    padding-left: 8px;
+
+    &:before {
+      content: url(../img/right-icon.png);
+      top: 0;
+    }
+  }
+
+  .button-favorit {
+    position: relative;
+    padding-left: 22px;
+
+    &:before {
+      content: url(../img/not-favorit-icon.png);
+      top: 0;
+    }
+  }
+
+  .button-close {
+    position: relative;
+    padding-left: 22px;
+
+    &:before {
+      content: url(../img/close-icon.png);
+      top: 0;
+    }
+  }
+}
