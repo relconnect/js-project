@@ -1,9 +1,12 @@
 .main {
   max-width: 88rem;
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
   margin-bottom: 5rem;
+
+  &__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .card {
@@ -21,6 +24,7 @@
 }
 
 .modal {
+  display: none;
   margin: 0; /* убираем отступы */
   padding: 0; /* убираем отступы */
   position: fixed; /* фиксируем положение */

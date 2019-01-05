@@ -479,7 +479,7 @@ template {
 }
 
 .form__button-large {
-  min-width: 8.1rem;
+  width: 15.2rem;
   box-sizing: border-box;
   padding: 0.6rem 2rem;
   margin: 0 auto;
@@ -521,9 +521,12 @@ template {
 .main {
   max-width: 88rem;
   margin: 0 auto;
+  margin-bottom: 5rem;
+}
+
+.main__wrapper {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 5rem;
 }
 
 .card {
@@ -541,6 +544,7 @@ template {
 }
 
 .modal {
+  display: none;
   margin: 0;
   /* убираем отступы */
   padding: 0;
@@ -625,4 +629,78 @@ template {
 
 html {
   font-size: 10px;
+}
+
+@media screen and (max-width: 880px) {
+  .main {
+    max-width: 66rem;
+  }
+
+  .main .card {
+    min-width: calc((100% - 26px) / 3);
+  }
+
+  .main .card:nth-child(3n) {
+    margin-right: 0px;
+  }
+
+  .main .card:nth-child(4n) {
+    margin-right: 13px;
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .header {
+    max-width: 42rem;
+  }
+
+  .main {
+    max-width: 44rem;
+  }
+
+  .main .card {
+    min-width: calc((100% - 13px) / 2);
+  }
+
+  .main .card:nth-child(3n) {
+    margin-right: 13px;
+  }
+
+  .main .card:nth-child(2n) {
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .form {
+    display: contents;
+  }
+
+  .form__input {
+    margin-bottom: 20px;
+  }
+
+  .form__button-small {
+    width: 60%;
+    height: 30px;
+    margin-left: 0px;
+  }
+
+  .form-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .main {
+    max-width: 210px;
+  }
+
+  .main .card {
+    min-width: 100%;
+    margin-right: 0px;
+  }
+
+  .main .card:nth-child(3n) {
+    margin-right: 0px;
+  }
 }
