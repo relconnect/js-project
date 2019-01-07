@@ -5,8 +5,9 @@
 @import "fonts";
 @import "variables";
 @import "media";
-@import "header.scss";
-@import "main.scss";
+@import "header";
+@import "main";
+@import "favorite";
 
 html {
   font-size: 10px;
