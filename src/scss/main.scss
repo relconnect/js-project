@@ -22,6 +22,10 @@
   &:nth-child(4n) {
     margin-right: 0px;
   }
+
+  &__img {
+    width: 100%;
+  }
 }
 
 .modal {
