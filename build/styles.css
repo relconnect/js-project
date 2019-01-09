@@ -436,6 +436,7 @@ template {
       margin-left: 1rem;
       box-sizing: border-box; }
     .form__button-large {
+      display: none;
       width: 15.2rem;
       box-sizing: border-box;
       padding: 0.6rem 2rem;
