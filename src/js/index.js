@@ -8,15 +8,19 @@ const form = document.querySelector('.form');
 const input = document.querySelector('.js-input');
 const spinner = document.querySelector('.spinner-overlay');
 const loadMoreBtn = document.querySelector('.js-load-more');
+const modal = document.querySelector('.modal');
 let currentPage = 1;
 let currentQuery = '';
 const persistedPhotos = storage.get();
 const fetchedPhotos = [];
 
+console.log(modal);
+
 if (persistedPhotos) {
   hydratePhotosGrid(persistedPhotos);
 }
 
+grid.addEventListener('click', onImgClick);
 form.addEventListener('submit', handleFormSubmit);
 loadMoreBtn.addEventListener('click', handleLoadMoreClick);
 
@@ -40,7 +44,7 @@ function handleLoadMoreClick() {
 
   handleFetch({
     query: currentQuery,
-    count: 8,
+    count: 12,
     page: currentPage,
   });
 }
@@ -76,7 +80,7 @@ function handleFetch(params) {
 
   fetchImages(params).then((photos) => {
     fetchedPhotos.push(...photos);
-    storage.set(fetchedPhotos);
+    //storage.set(fetchedPhotos);
 
     const markup = createGridItems(photos);
     updatePhotosGrid(markup);
@@ -101,4 +105,17 @@ function handleFormSubmit(e) {
 
   e.target.reset();
   showLoadMoreBtn();
+}
+
+function onImgClick({target}) {
+  console.log(target);
+  const nodeName = target.nodeName;
+  if(nodeName !== 'IMG') return;
+
+  modal.style.display = "block";
+
+  const modalImg = document.querySelector('.js-modal-img');
+
+  modalImg.setAttribute('src', target.dataset.fullview);
+  console.log('Go racoon!');
 }
