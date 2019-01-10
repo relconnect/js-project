@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="copyright" content="Author" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#000000" />
+    <meta name="apple-mobile-web-app-title" content="Application Name" />
+    <meta
+      name="msapplication-TileImage"
+      content="images/favicons/144x144.png"
+    />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>FindPic</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-  <meta name="theme-color" content="#000000">
-  <meta name="copyright" content="Author">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
-  <meta name="apple-mobile-web-app-title" content="Application Name">
-  <meta name="msapplication-TileImage" content="images/favicons/144x144.png">
-  <meta name="msapplication-TileColor" content="#000000">
-  <meta name="format-detection" content="telephone=no">
-  <title>FindPic</title>
-</head>
-
-<body>
-<header class="header">
-<div class="header__favorit">
-  <a href="./favorites.html" class="header__link">Избранное</a>
-</div>
-<div class="header__logo">
-  <a href="#">
-  <img src="../img/logo.png" alt="">
-</a>
-</div>
-<div class="form-wrapper">
-  <form class="form">
-    <input type="text" class="form__input js-input" placeholder="Введите поисковый запрос">
-    <button type="submit" class="form__button js-button form__button-small">Поиск</button>
-  </form>
-</div>
-</header>
-<main class="main">
-  <div class="main__wrapper js-grid">
-  
-  
-  
-  </div>
-  <p class="form__button js-load-more form__button-large">Показать еще</p>
-</main>
-
-<div class="spinner-overlay">
-    <div class="spinner">
-      <div class="rect1"></div>
-      <div class="rect2"></div>
-      <div class="rect3"></div>
-      <div class="rect4"></div>
-      <div class="rect5"></div>
+  <body>
+    <header class="header">
+      <div class="header__favorit">
+        <a href="./favorites.html" class="header__link">Избранное</a>
+      </div>
+      <div class="header__logo">
+        <a href="#"> <img src="../img/logo.png" alt="" /> </a>
+      </div>
+      <div class="form-wrapper">
+        <form class="form">
+          <input
+            type="text"
+            class="form__input js-input"
+            placeholder="Введите поисковый запрос"
+          />
+          <button
+            type="submit"
+            class="form__button js-button form__button-small"
+          >
+            Поиск
+          </button>
+        </form>
+      </div>
+    </header>
+    <main class="main">
+      <div class="main__wrapper js-main-wrapper"></div>
+      <p class="form__button js-load-more form__button-large">Показать еще</p>
+    </main>
+    <!-- spinner -->
+    <div class="spinner-overlay">
+      <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+      </div>
     </div>
-  </div>
-
-<section class="modal">
-  <img src="img/img-1.png" class="modal__img" alt="">
-  <div class="modal__buttons">
-    <span class="button-left"></span>
-    <span class="button-right"></span>
-    <span class="button-favorit"></span>
-    <span class="button-close"></span>
-  </div>
-</section>
-  <script src="../js/index.js"></script>
-</body>
-
+    <!-- modal-window -->
+    <section class="modal">
+      <img src="img/img-1.png" class="modal__img" alt="" />
+      <div class="modal__buttons">
+        <span class="button-left"></span> <span class="button-right"></span>
+        <span class="button-favorit"></span> <span class="button-close"></span>
+      </div>
+    </section>
+    <script src="../js/index.js"></script>
+  </body>
 </html>

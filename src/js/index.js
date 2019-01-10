@@ -1,12 +1,9 @@
 import { fetchImages } from '../services/api';
 import * as storage from '../services/storage';
 import gridItemTpl from '../templates/grid-item.hbs';
-//import 'normalize.css';
 import '../scss/styles.scss';
 
-console.log(gridItemTpl);
-
-const grid = document.querySelector('.js-grid');
+const grid = document.querySelector('.js-main-wrapper');
 const form = document.querySelector('.form');
 const input = document.querySelector('.js-input');
 const spinner = document.querySelector('.spinner-overlay');
