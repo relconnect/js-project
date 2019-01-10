@@ -56,9 +56,6 @@ function showLoadMoreBtn() {
   if (loadMoreBtn.style.display !== "block") {
     loadMoreBtn.style.display = "block";
   }
-  // if (!loadMoreBtn.classList.contains('visible')) {
-  //   loadMoreBtn.classList.add('visible');
-  // }
 }
 
 function resetCurrentPage() {
@@ -101,7 +98,7 @@ function handleFormSubmit(e) {
 
   handleFetch({
     query: currentQuery,
-    count: 8,
+    count: 12,
     page: currentPage,
   });
 
