@@ -80,7 +80,7 @@ function handleFetch(params) {
 
   fetchImages(params).then((photos) => {
     fetchedPhotos.push(...photos);
-    //storage.set(fetchedPhotos);
+    storage.set(fetchedPhotos);
 
     const markup = createGridItems(photos);
     updatePhotosGrid(markup);
