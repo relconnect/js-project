@@ -18,6 +18,7 @@
   margin-right: 13px;
   margin-bottom: 13px;
   position: relative;
+  box-shadow: 7px 8px 20px -5px rgba(0, 0, 0, 0.5);
 
   &:nth-child(4n) {
     margin-right: 0px;
@@ -130,7 +131,7 @@
 }
 
 .spinner > div {
-  background-color:rgb(103, 58, 183);;
+  background-color: rgb(103, 58, 183);;
   height: 100%;
   width: 20px;
   display: inline-block;
@@ -165,6 +166,7 @@
   100% {
     -webkit-transform: scaleY(0.4);
   }
+
   20% {
     -webkit-transform: scaleY(1);
   }
@@ -177,6 +179,7 @@
     transform: scaleY(0.4);
     -webkit-transform: scaleY(0.4);
   }
+
   20% {
     transform: scaleY(1);
     -webkit-transform: scaleY(1);
