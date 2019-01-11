@@ -108,7 +108,7 @@ function handleFormSubmit(e) {
 }
 
 function onImgClick({target}) {
-  console.log(target);
+  
   const nodeName = target.nodeName;
   if(nodeName !== 'IMG') return;
 
