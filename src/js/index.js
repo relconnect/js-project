@@ -2,13 +2,7 @@ import { fetchImages } from '../services/api';
 import * as storage from '../services/storage';
 import gridItemTpl from '../templates/grid-item.hbs';
 import '../scss/styles.scss';
-// const shortid = require('shortid');
-// const hbs = require('handlebars/runtime');
-// let id = 0;
-// hbs.registerHelper("setId", function(){
-//   id+=1;
-//   return id;
-// });
+import { SIGQUIT } from 'constants';
 
 const grid = document.querySelector('.js-main-wrapper');
 const form = document.querySelector('.form');
@@ -19,25 +13,32 @@ const modal = document.querySelector('.modal');
 let currentPage = 1;
 let currentQuery = '';
 const persistedPhotos = storage.get();
+ 
+//new line
+const favoriteCollections = [];
 const fetchedPhotos = [];
-const favoritePhotos = [];
 const closeBtn = document.querySelector('.button-close');
 const prewImg = document.querySelector('.button-left');
 const nextImg = document.querySelector('.button-right');
+const favorit = document.querySelector('.button-favorit');
 
 
-console.log(modal);
+// console.log(modal);
 
 // if (persistedPhotos) {
 //   hydratePhotosGrid(persistedPhotos);
 // }
 
-closeBtn.addEventListener('click', closeModal);
+
 grid.addEventListener('click', onImgClick);
 form.addEventListener('submit', handleFormSubmit);
 loadMoreBtn.addEventListener('click', handleLoadMoreClick);
+
+//New lines
 nextImg.addEventListener('click', showNextImg);
 prewImg.addEventListener('click', showPrew);
+closeBtn.addEventListener('click', closeModal);
+favorit.addEventListener('click', addToFavorit);
 
 // ============= Helpers
 
@@ -93,15 +94,8 @@ function resetPhotosGrid() {
 function handleFetch(params) {
   toggleSpinner();  
   fetchImages(params).then((photos) => {
-    fetchedPhotos.push(...photos);    
-    storage.set(fetchedPhotos);   
-    
-    // photos.forEach((elem) =>{
-    //   imgPagination += 1; 
-    //  elem.imgId = imgPagination;
-           
-    // });
-    // console.log(photos);
+    // fetchedPhotos.push(...photos);    
+    // storage.set(fetchedPhotos);      
     const markup = createGridItems(photos);
     updatePhotosGrid(markup);
     toggleSpinner();
@@ -137,7 +131,8 @@ function onImgClick({target}) {
   modalImg.dataset.cardId =target.parentNode.dataset.id;
 }
 
-//functions for modal window
+
+//functions for modal window (New line)
 
 function closeModal () {
   modal.style.display = "none";
@@ -165,7 +160,14 @@ function showPrew(){
 }
 
 function addToFavorit(){
-
+  const item = {};
+  const modalImg = document.querySelector('.js-modal-img');  
+  const fullImgId = modalImg.dataset.cardId;
+  const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
+ 
+  item.id = currentImg.getAttribute('data-id');
+  item.previewURL = currentImg.querySelector('.card__img').getAttribute('src');
+  item.largeImageURL = currentImg.querySelector('.card__img').getAttribute('data-fullview');  
+  favoriteCollections.push(item); 
+  storage.set(favoriteCollections);  
 }
-
-
