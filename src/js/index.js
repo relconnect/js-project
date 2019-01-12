@@ -11,18 +11,16 @@ const input = document.querySelector('.js-input');
 const spinner = document.querySelector('.spinner-overlay');
 const loadMoreBtn = document.querySelector('.js-load-more');
 const modal = document.querySelector('.modal');
-const favorite = document.querySelector('.js-link');
-let currentPage = 1;
-let currentQuery = '';
-
-
-const favoriteCollections = [];
+const btnFavorite = document.querySelector('.js-link');
 const closeBtn = document.querySelector('.button-close');
 const prewImg = document.querySelector('.button-left');
 const nextImg = document.querySelector('.button-right');
 const favorit = document.querySelector('.button-favorit');
+const favoriteCollections = [];
+let currentPage = 1;
+let currentQuery = '';
 
-favorite.addEventListener('click', onFavClick);
+btnFavorite.addEventListener('click', onFavClick);
 grid.addEventListener('click', onImgClick);
 form.addEventListener('submit', handleFormSubmit);
 loadMoreBtn.addEventListener('click', handleLoadMoreClick);
@@ -65,6 +63,12 @@ function toggleSpinner() {
 function showLoadMoreBtn() {
   if (loadMoreBtn.style.display !== 'block') {
     loadMoreBtn.style.display = 'block';
+  }
+}
+
+function hideLoadMoreBtn() {
+  if (loadMoreBtn.style.display !== 'none') {
+    loadMoreBtn.style.display = 'none';
   }
 }
 
@@ -127,7 +131,7 @@ function createFavoritesGallery() {
 }
 
 /**
- *Remove "Избранное" from page
+ *Remove "Избранное" from the page
  *
  */
 function removeFavNode() {
@@ -170,6 +174,7 @@ function onImgClick({ target }) {
 function onFavClick(e) {
   e.preventDefault();
   toggleSpinner();
+  hideLoadMoreBtn();
   resetCurrentPage();
   resetPhotosGrid();
   createFavoritesGallery();
