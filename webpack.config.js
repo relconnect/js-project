@@ -58,11 +58,6 @@ module.exports = {
       template: './src/html/index.html',
       filename: 'index.html',
     }),
-    new HtmlWebpackPlugin({
-      hash: true,
-      template: './src/html/favorites.html',
-      filename: 'favorites.html',
-    }),
     new MiniCssExtractPlugin({
       hash: true,
       filename: 'styles.css',
