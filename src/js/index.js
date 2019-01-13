@@ -221,12 +221,16 @@ function showPrew() {
   modalImg.dataset.cardId = id;
 }
 
-function addToFavorit() {
-  const item = {};
+function toggleFavIcon() {
   const favBtn = document.querySelector('.button-favorit');
   console.log(favBtn);
-  favBtn.classList.add('button-favorit-on')
+  favBtn.classList.add('button-favorit-on');
+}
 
+function addToFavorit() {
+toggleFavIcon();
+
+  const item = {};
   const modalImg = document.querySelector('.js-modal-img');
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
