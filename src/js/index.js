@@ -223,12 +223,12 @@ function showPrew() {
 
 function toggleFavIcon() {
   const favBtn = document.querySelector('.button-favorit');
-  console.log(favBtn);
-  favBtn.classList.add('button-favorit-on');
+  return favBtn.classList.toggle('button-favorit-on');
+  
 }
 
 function addToFavorit() {
-toggleFavIcon();
+  toggleFavIcon();
 
   const item = {};
   const modalImg = document.querySelector('.js-modal-img');
