@@ -223,6 +223,10 @@ function showPrew() {
 
 function addToFavorit() {
   const item = {};
+  const favBtn = document.querySelector('.button-favorit');
+  console.log(favBtn);
+  favBtn.classList.add('button-favorit-on')
+
   const modalImg = document.querySelector('.js-modal-img');
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);

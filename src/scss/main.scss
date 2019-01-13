@@ -94,6 +94,16 @@
     }
   }
 
+  .button-favorit-on {
+    position: relative;
+    padding-left: 22px;
+
+    &:before {
+      content: url(../img/favorit-icon.png);
+      top: 0;
+    }
+  }
+
   .button-close {
     position: relative;
     margin-left: 22px;
