@@ -221,10 +221,16 @@ function onFavGalleryClick(e) {
 
 //functions for modal window 
 
-function closeModal() {
-  
-  modal.style.display = "none";
-}
+function closeModal(e) {  
+  e.stopPropagation();
+  if (
+    e.target.classList.contains("button-close") ||
+    e.target.classList.contains("modal")
+  ) {
+    modal.style.display = "none";
+  } else {
+    return;
+  }
 
 function showNextImg() {
   resetFavIcon();
