@@ -226,6 +226,7 @@ function onFavGalleryClick(e) {
 //functions for modal window 
 
 function closeModal(e) {  
+  resetFavIcon();
   e.stopPropagation();
   if (
     e.target.classList.contains("button-close") ||
