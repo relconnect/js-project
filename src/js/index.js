@@ -222,7 +222,7 @@ function onFavGalleryClick(e) {
 //functions for modal window 
 
 function closeModal() {
-  resetFavIcon();
+  
   modal.style.display = "none";
 }
 
