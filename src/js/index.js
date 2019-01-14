@@ -1,34 +1,38 @@
-import { fetchImages } from '../services/api';
-import * as storage from '../services/storage';
-import gridItemTpl from '../templates/grid-item.hbs';
-import favoritesImgTpl from '../templates/favorites-img.hbs';
-import '../scss/styles.scss';
+import { fetchImages } from "../services/api";
+import * as storage from "../services/storage";
+import gridItemTpl from "../templates/grid-item.hbs";
+import favoritesImgTpl from "../templates/favorites-img.hbs";
+import "../scss/styles.scss";
 
-const main = document.querySelector('.main');
-const grid = document.querySelector('.js-main-wrapper');
-const form = document.querySelector('.form');
-const input = document.querySelector('.js-input');
-const spinner = document.querySelector('.spinner-overlay');
-const loadMoreBtn = document.querySelector('.js-load-more');
-const modal = document.querySelector('.modal');
-const btnFavorite = document.querySelector('.js-link');
-const closeBtn = document.querySelector('.button-close');
-const prewImg = document.querySelector('.button-left');
-const nextImg = document.querySelector('.button-right');
-const favorit = document.querySelector('.button-favorit');
-const favoriteCollections = [];
+const main = document.querySelector(".main");
+const grid = document.querySelector(".js-main-wrapper");
+const form = document.querySelector(".form");
+const input = document.querySelector(".js-input");
+const spinner = document.querySelector(".spinner-overlay");
+const loadMoreBtn = document.querySelector(".js-load-more");
+const modal = document.querySelector(".modal");
+const btnFavorite = document.querySelector(".js-link");
+const closeBtn = document.querySelector(".button-close");
+const prewImg = document.querySelector(".button-left");
+const nextImg = document.querySelector(".button-right");
+const favorit = document.querySelector(".button-favorit");
+let favoriteCollections = [];
+if(storage.get()){
+  favoriteCollections = [...storage.get()];
+}
+
 let currentPage = 1;
-let currentQuery = '';
+let currentQuery = "";
 
-btnFavorite.addEventListener('click', onFavClick);
-grid.addEventListener('click', onImgClick);
-form.addEventListener('submit', handleFormSubmit);
-loadMoreBtn.addEventListener('click', handleLoadMoreClick);
+btnFavorite.addEventListener("click", onFavClick);
+grid.addEventListener("click", onImgClick);
+form.addEventListener("submit", handleFormSubmit);
+loadMoreBtn.addEventListener("click", handleLoadMoreClick);
 
-nextImg.addEventListener('click', showNextImg);
-prewImg.addEventListener('click', showPrew);
-closeBtn.addEventListener('click', closeModal);
-favorit.addEventListener('click', addToFavorit);
+nextImg.addEventListener("click", showNextImg);
+prewImg.addEventListener("click", showPrew);
+closeBtn.addEventListener("click", closeModal);
+favorit.addEventListener("click", addToFavorit);
 
 // Helpers
 
@@ -42,7 +46,14 @@ function hydratePhotosGrid(photos, cb) {
   const markup = createGridItems(photos, cb);
   updatePhotosGrid(markup);
 }
-
+function isAdded(id) {
+  if(storage.get() !== null){
+    return storage.get().find(elem => elem.id == id);
+  }else {
+    return false;
+  }
+ 
+}
 /**
  *
  *
@@ -51,11 +62,11 @@ function hydratePhotosGrid(photos, cb) {
  * @returns markup ready to render
  */
 function createGridItems(items, cb) {
-  return items.reduce((markup, item) => markup + cb(item), '');
+  return items.reduce((markup, item) => markup + cb(item), "");
 }
 
 function updatePhotosGrid(markup) {
-  grid.insertAdjacentHTML('beforeend', markup);
+  grid.insertAdjacentHTML("beforeend", markup);
 }
 
 function handleLoadMoreClick() {
@@ -69,18 +80,18 @@ function handleLoadMoreClick() {
 }
 
 function toggleSpinner() {
-  return spinner.classList.toggle('visible');
+  return spinner.classList.toggle("visible");
 }
 
 function showLoadMoreBtn() {
-  if (loadMoreBtn.style.display !== 'block') {
-    loadMoreBtn.style.display = 'block';
+  if (loadMoreBtn.style.display !== "block") {
+    loadMoreBtn.style.display = "block";
   }
 }
 
 function hideLoadMoreBtn() {
-  if (loadMoreBtn.style.display !== 'none') {
-    loadMoreBtn.style.display = 'none';
+  if (loadMoreBtn.style.display !== "none") {
+    loadMoreBtn.style.display = "none";
   }
 }
 
@@ -97,7 +108,7 @@ function scrollToBottom() {
 }
 
 function resetPhotosGrid() {
-  grid.innerHTML = '';
+  grid.innerHTML = "";
 }
 
 function handleFetch(params) {
@@ -121,21 +132,21 @@ function handleFetch(params) {
  * @returns new element
  */
 function createElement(element, text, classAdd, parentNode) {
-  const domNode = document.querySelector('.favorite-text');
+  const domNode = document.querySelector(".favorite-text");
 
-  if (typeof domNode !== 'undefined' && domNode !== null) return;
+  if (typeof domNode !== "undefined" && domNode !== null) return;
   const elem = document.createElement(element);
   const elemText = document.createTextNode(text);
 
   elem.classList.add(classAdd);
   elem.appendChild(elemText);
-  parentNode.insertAdjacentElement('afterbegin', elem);
+  parentNode.insertAdjacentElement("afterbegin", elem);
 }
 
 function createFavoritesGallery() {
   const favoritesPhotos = storage.get();
 
-  createElement('p', 'Избранное', 'favorite-text', main);
+  createElement("p", "Избранное", "favorite-text", main);
 
   if (favoritesPhotos) {
     hydratePhotosGrid(favoritesPhotos, favoritesImgTpl);
@@ -147,8 +158,8 @@ function createFavoritesGallery() {
  *
  */
 function removeFavNode() {
-  const favNode = document.querySelector('.favorite-text');
-  if (typeof favNode !== 'undefined' && favNode !== null) {
+  const favNode = document.querySelector(".favorite-text");
+  if (typeof favNode !== "undefined" && favNode !== null) {
     main.removeChild(favNode);
   }
 }
@@ -174,12 +185,12 @@ function handleFormSubmit(e) {
 
 function onImgClick({ target }) {
   const nodeName = target.nodeName;
-  if (nodeName !== 'IMG') return;
+  if (nodeName !== "IMG") return;
 
-  modal.style.display = 'block';
+  modal.style.display = "block";
 
-  const modalImg = document.querySelector('.js-modal-img');
-  modalImg.setAttribute('src', target.dataset.fullview);
+  const modalImg = document.querySelector(".js-modal-img");
+  modalImg.setAttribute("src", target.dataset.fullview);
   modalImg.dataset.cardId = target.parentNode.dataset.id;
 }
 
@@ -197,49 +208,53 @@ function onFavClick(e) {
 //functions for modal window (New line)
 
 function closeModal() {
-  modal.style.display = 'none';
+  modal.style.display = "none";
 }
 
 function showNextImg() {
-  const modalImg = document.querySelector('.js-modal-img');
+  const modalImg = document.querySelector(".js-modal-img");
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
   const nextTarget = currentImg.nextSibling;
-  const src = nextTarget.querySelector('.card__img');
-  const id = nextTarget.getAttribute('data-id');
-  modalImg.setAttribute('src', src.getAttribute('data-fullview'));
+  const src = nextTarget.querySelector(".card__img");
+  const id = nextTarget.getAttribute("data-id");
+  modalImg.setAttribute("src", src.getAttribute("data-fullview"));
   modalImg.dataset.cardId = id;
 }
 function showPrew() {
-  const modalImg = document.querySelector('.js-modal-img');
+  const modalImg = document.querySelector(".js-modal-img");
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
   const prevTarget = currentImg.previousSibling;
-  const src = prevTarget.querySelector('.card__img');
-  const id = prevTarget.getAttribute('data-id');
-  modalImg.setAttribute('src', src.getAttribute('data-fullview'));
+  const src = prevTarget.querySelector(".card__img");
+  const id = prevTarget.getAttribute("data-id");
+  modalImg.setAttribute("src", src.getAttribute("data-fullview"));
   modalImg.dataset.cardId = id;
 }
 
 function toggleFavIcon() {
-  const favBtn = document.querySelector('.button-favorit');
-  return favBtn.classList.toggle('button-favorit-on');
-  
+  const favBtn = document.querySelector(".button-favorit");
+  return favBtn.classList.toggle("button-favorit-on");
 }
 
 function addToFavorit() {
   toggleFavIcon();
-
   const item = {};
-  const modalImg = document.querySelector('.js-modal-img');
+  const modalImg = document.querySelector(".js-modal-img");
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
 
-  item.id = currentImg.getAttribute('data-id');
-  item.previewURL = currentImg.querySelector('.card__img').getAttribute('src');
-  item.largeImageURL = currentImg
-    .querySelector('.card__img')
-    .getAttribute('data-fullview');
-  favoriteCollections.push(item);
-  storage.set(favoriteCollections);
+  if (isAdded(fullImgId)) {
+    return;
+  } else {
+    item.id = currentImg.getAttribute("data-id");
+    item.previewURL = currentImg
+      .querySelector(".card__img")
+      .getAttribute("src");
+    item.largeImageURL = currentImg
+      .querySelector(".card__img")
+      .getAttribute("data-fullview");
+    favoriteCollections.push(item);
+    storage.set(favoriteCollections);
+  }
 }

@@ -39,6 +39,7 @@
     "handlebars-loader": "^1.7.0",
     "jss": "^9.8.7",
     "normalize.css": "^8.0.1",
+    "npm": "^6.5.0",
     "path": "^0.12.7",
     "shortid": "^2.2.14",
     "ttf2woff": "^2.0.1",
