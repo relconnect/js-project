@@ -16,8 +16,13 @@ const closeBtn = document.querySelector(".button-close");
 const prewImg = document.querySelector(".button-left");
 const nextImg = document.querySelector(".button-right");
 const favorit = document.querySelector(".button-favorit");
+const layer = document.querySelector(".modal");
+layer.addEventListener("click", function(e) {
+  closeModal(e);
+});
+
 let favoriteCollections = [];
-if(storage.get()){
+if (storage.get()) {
   favoriteCollections = [...storage.get()];
 }
 
@@ -31,7 +36,7 @@ loadMoreBtn.addEventListener("click", handleLoadMoreClick);
 
 nextImg.addEventListener("click", showNextImg);
 prewImg.addEventListener("click", showPrew);
-closeBtn.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
 favorit.addEventListener("click", addToFavorit);
 
 // Helpers
@@ -47,12 +52,11 @@ function createPhotosGrid(photos, cb) {
   updatePhotosGrid(markup);
 }
 function isAdded(id) {
-  if(storage.get() !== null){
+  if (storage.get() !== null) {
     return storage.get().find(elem => elem.id == id);
-  }else {
+  } else {
     return false;
   }
- 
 }
 /**
  *
@@ -228,9 +232,10 @@ function closeModal(e) {
     e.target.classList.contains("modal")
   ) {
     modal.style.display = "none";
-  } 
+  } else {
     return;
   }
+}
 
 function showNextImg() {
   resetFavIcon();

@@ -5,13 +5,15 @@
     .card {
       min-width: calc((100% - 26px) / 3);
 
+      &:nth-child(4n) {
+        margin-right: 13px;
+      }
+
       &:nth-child(3n) {
         margin-right: 0px;
       }
 
-      &:nth-child(4n) {
-        margin-right: 13px;
-      }
+     
     }
   }
 }

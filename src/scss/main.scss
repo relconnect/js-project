@@ -26,6 +26,7 @@
 
   &__img {
     width: 100%;
+    object-fit: contain;
   }
 }
 
@@ -50,6 +51,8 @@
     display: block;
     z-index: 1000;
     margin-top: 10%;
+    background-color: $primery-color-img;
+    object-fit: contain;
   }
 
   &__buttons {
