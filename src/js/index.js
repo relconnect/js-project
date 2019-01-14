@@ -228,7 +228,7 @@ function closeModal(e) {
     e.target.classList.contains("modal")
   ) {
     modal.style.display = "none";
-  } else {
+  } 
     return;
   }
 
@@ -269,9 +269,7 @@ function addToFavorit() {
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
 
-  if (isAdded(fullImgId)) {
-    return;
-  } else {
+  if (isAdded(fullImgId)) return;
     item.id = currentImg.getAttribute("data-id");
     item.previewURL = currentImg
       .querySelector(".card__img")
@@ -281,5 +279,4 @@ function addToFavorit() {
       .getAttribute("data-fullview");
     favoriteCollections.push(item);
     storage.set(favoriteCollections);
-  }
 }
