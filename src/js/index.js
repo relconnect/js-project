@@ -24,7 +24,7 @@ if(storage.get()){
 let currentPage = 1;
 let currentQuery = "";
 
-btnFavorite.addEventListener("click", onFavClick);
+btnFavorite.addEventListener("click", onFavGalleryClick);
 grid.addEventListener("click", onImgClick);
 form.addEventListener("submit", handleFormSubmit);
 loadMoreBtn.addEventListener("click", handleLoadMoreClick);
@@ -42,7 +42,7 @@ favorit.addEventListener("click", addToFavorit);
  * @param {*} photos array of objects with img data
  * @param {*} cb hbs tamplate callback function
  */
-function hydratePhotosGrid(photos, cb) {
+function createPhotosGrid(photos, cb) {
   const markup = createGridItems(photos, cb);
   updatePhotosGrid(markup);
 }
@@ -129,6 +129,7 @@ function handleFetch(params) {
  * @param {*} element type of creating document
  * @param {*} text text inside element(optional)
  * @param {*} classAdd element class
+ * @param {*} parentNode parent node name where element will append
  * @returns new element
  */
 function createElement(element, text, classAdd, parentNode) {
@@ -149,7 +150,7 @@ function createFavoritesGallery() {
   createElement("p", "Избранное", "favorite-text", main);
 
   if (favoritesPhotos) {
-    hydratePhotosGrid(favoritesPhotos, favoritesImgTpl);
+    createPhotosGrid(favoritesPhotos, favoritesImgTpl);
   }
 }
 
@@ -162,6 +163,13 @@ function removeFavNode() {
   if (typeof favNode !== "undefined" && favNode !== null) {
     main.removeChild(favNode);
   }
+}
+
+function removeFromFavorite(e) {
+  const node = e.target.parentNode;
+    const imgId = node.getAttribute('data-id');
+    node.parentNode.removeChild(node);
+    storage.remove(imgId);
 }
 
 function handleFormSubmit(e) {
@@ -183,18 +191,24 @@ function handleFormSubmit(e) {
   showLoadMoreBtn();
 }
 
-function onImgClick({ target }) {
-  const nodeName = target.nodeName;
+function onImgClick(e) {
+  const nodeName = e.target.nodeName;
+
   if (nodeName !== "IMG") return;
-
+  if(e.target.classList.contains('delete')) {
+    removeFromFavorite(e);
+    resetPhotosGrid();
+    createPhotosGrid(storage.get(), favoritesImgTpl);
+    return;
+  }
+  
   modal.style.display = "block";
-
   const modalImg = document.querySelector(".js-modal-img");
-  modalImg.setAttribute("src", target.dataset.fullview);
-  modalImg.dataset.cardId = target.parentNode.dataset.id;
+  modalImg.setAttribute("src", e.target.dataset.fullview);
+  modalImg.dataset.cardId = e.target.parentNode.dataset.id;
 }
 
-function onFavClick(e) {
+function onFavGalleryClick(e) {
   e.preventDefault();
   toggleSpinner();
   hideLoadMoreBtn();
@@ -205,13 +219,15 @@ function onFavClick(e) {
   toggleSpinner();
 }
 
-//functions for modal window (New line)
+//functions for modal window 
 
 function closeModal() {
+  resetFavIcon();
   modal.style.display = "none";
 }
 
 function showNextImg() {
+  resetFavIcon();
   const modalImg = document.querySelector(".js-modal-img");
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
@@ -222,6 +238,7 @@ function showNextImg() {
   modalImg.dataset.cardId = id;
 }
 function showPrew() {
+  resetFavIcon();
   const modalImg = document.querySelector(".js-modal-img");
   const fullImgId = modalImg.dataset.cardId;
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
@@ -232,13 +249,15 @@ function showPrew() {
   modalImg.dataset.cardId = id;
 }
 
-function toggleFavIcon() {
-  const favBtn = document.querySelector(".button-favorit");
-  return favBtn.classList.toggle("button-favorit-on");
+function switchFavIcon() {
+  return favorit.classList.add("button-favorit-on");
 }
 
+function resetFavIcon() {
+  return favorit.classList.remove("button-favorit-on");
+}
 function addToFavorit() {
-  toggleFavIcon();
+  switchFavIcon();
   const item = {};
   const modalImg = document.querySelector(".js-modal-img");
   const fullImgId = modalImg.dataset.cardId;
