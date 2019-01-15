@@ -171,9 +171,9 @@ function removeFavNode() {
 
 function removeFromFavorite(e) {
   const node = e.target.parentNode;
-    const imgId = node.getAttribute('data-id');
-    node.parentNode.removeChild(node);
-    storage.remove(imgId);
+  const imgId = node.getAttribute("data-id");
+  node.parentNode.removeChild(node);
+  storage.remove(imgId);
 }
 
 function handleFormSubmit(e) {
@@ -199,17 +199,20 @@ function onImgClick(e) {
   const nodeName = e.target.nodeName;
 
   if (nodeName !== "IMG") return;
-  if(e.target.classList.contains('delete')) {
+  if (e.target.classList.contains("delete")) {
     removeFromFavorite(e);
     resetPhotosGrid();
     createPhotosGrid(storage.get(), favoritesImgTpl);
     return;
   }
-  
+
   modal.style.display = "block";
   const modalImg = document.querySelector(".js-modal-img");
   modalImg.setAttribute("src", e.target.dataset.fullview);
   modalImg.dataset.cardId = e.target.parentNode.dataset.id;
+  if(isAdded(e.target.parentNode.dataset.id)){
+    favorit.classList.add("button-favorit-on");
+  }
 }
 
 function onFavGalleryClick(e) {
@@ -223,16 +226,17 @@ function onFavGalleryClick(e) {
   toggleSpinner();
 }
 
-//functions for modal window 
+//functions for modal window
 
-function closeModal(e) {  
-  resetFavIcon();
+function closeModal(e) {
+  
   e.stopPropagation();
   if (
     e.target.classList.contains("button-close") ||
     e.target.classList.contains("modal")
   ) {
     modal.style.display = "none";
+    resetFavIcon();
   } else {
     return;
   }
@@ -276,13 +280,11 @@ function addToFavorit() {
   const currentImg = document.querySelector(`[data-id="${fullImgId}"]`);
 
   if (isAdded(fullImgId)) return;
-    item.id = currentImg.getAttribute("data-id");
-    item.previewURL = currentImg
-      .querySelector(".card__img")
-      .getAttribute("src");
-    item.largeImageURL = currentImg
-      .querySelector(".card__img")
-      .getAttribute("data-fullview");
-    favoriteCollections.push(item);
-    storage.set(favoriteCollections);
+  item.id = currentImg.getAttribute("data-id");
+  item.previewURL = currentImg.querySelector(".card__img").getAttribute("src");
+  item.largeImageURL = currentImg
+    .querySelector(".card__img")
+    .getAttribute("data-fullview");
+  favoriteCollections.push(item);
+  storage.set(favoriteCollections);
 }
