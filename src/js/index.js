@@ -51,6 +51,7 @@ function createPhotosGrid(photos, cb) {
   const markup = createGridItems(photos, cb);
   updatePhotosGrid(markup);
 }
+
 function isAdded(id) {
   if (storage.get() !== null) {
     return storage.get().find(elem => elem.id == id);
@@ -196,6 +197,7 @@ function handleFormSubmit(e) {
 }
 
 function onImgClick(e) {
+  resetFavIcon();
   const nodeName = e.target.nodeName;
 
   if (nodeName !== "IMG") return;
@@ -226,13 +228,14 @@ function onFavGalleryClick(e) {
 //functions for modal window 
 
 function closeModal(e) {  
-  resetFavIcon();
+  
   e.stopPropagation();
   if (
     e.target.classList.contains("button-close") ||
     e.target.classList.contains("modal")
   ) {
     modal.style.display = "none";
+    resetFavIcon();
   } else {
     return;
   }
@@ -268,6 +271,7 @@ function switchFavIcon() {
 function resetFavIcon() {
   return favorit.classList.remove("button-favorit-on");
 }
+
 function addToFavorit() {
   switchFavIcon();
   const item = {};
