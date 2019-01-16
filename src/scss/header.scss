@@ -7,7 +7,7 @@
   padding-left: 3rem;
   padding-right: 3rem;
   padding-top: 3.3rem;
-  margin-bottom: 3rem;
+  // margin-bottom: 3rem;
 
   &__link {
     font-size: 1.6rem;
@@ -15,7 +15,10 @@
     color: $link-color;
     line-height: 1.688;
     text-decoration: none;
+    background: transparent;
+    border: none;
     position: relative;
+    outline: none;
 
     &::before {
       content: url(../img/icon.png);
@@ -42,13 +45,17 @@
 .form-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 4.5rem;
 }
 
 .form {
   //   width: 550px;
   display: flex;
   flex-basis: 55rem;
+
+  &__section {
+    padding-bottom: 3rem;
+  }
 
   &__input {
     width: 80%;
@@ -77,18 +84,31 @@
     cursor: pointer;
 
     &-small {
+      position: relative;
       min-width: 8.1rem;
       margin-left: 1rem;
       box-sizing: border-box;
+      
+
+      &:active {
+        top: 5px;
+        box-shadow: 3px 4px 10px -5px rgba(0, 0, 0, 0.5);
+      }
     }
 
     &-large {
+      position: relative;
       display: none;
       width: 15.2rem;      
       box-sizing: border-box;
       padding: 0.6rem 2rem;
       margin: 0 auto;
       margin-top: 1.8rem;
+
+      &:active {
+        top: 5px;
+        box-shadow: 3px 4px 10px -5px rgba(0, 0, 0, 0.5);
+      }
     }
 
     &:focus {
